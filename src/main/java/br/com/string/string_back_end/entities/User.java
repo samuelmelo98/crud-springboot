@@ -1,30 +1,38 @@
 package br.com.string.string_back_end.entities;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "tb_user")
+
 public class User implements java.io.Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; 
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
+    @SequenceGenerator(name = "user_seq", sequenceName = "seq_tb_user", allocationSize = 1)
+    private Long idUser;
     private String nome;
     private String sobreNome;
     private String email;
     private String senha;
     private String telefone;
+    /**
+     * Neste mapeamento, um usuario pode ter varios aparelhos associados ao seu id.
+     * E um aparelho pertence a um usuario.
+     */
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Aparelho> aparelhos ;// = new ArrayList<Aparelho>();
 
     public User(){}
 
     
 
-    public User(Long id, String nome, String sobreNome, String email, String senha, String telefone) {
-        this.id = id;
+    public User(Long idUser, String nome, String sobreNome, String email, String senha, String telefone) {
+        this.idUser = idUser;
         this.nome = nome;
         this.sobreNome = sobreNome;
         this.email = email;
@@ -34,12 +42,12 @@ public class User implements java.io.Serializable {
 
 
 
-    public Long getId() {
-        return id;
+    public Long getIdUser() {
+        return idUser;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.idUser = id;
     }
 
     public String getNome() {
@@ -82,10 +90,18 @@ public class User implements java.io.Serializable {
         this.telefone = telefone;
     }
 
+    public List<Aparelho> getAparelhos() {
+        return aparelhos;
+    }
+
+    public void setAparelhos(List<Aparelho> aparelhos) {
+        this.aparelhos = aparelhos;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 41 * hash + Objects.hashCode(this.id);
+        hash = 41 * hash + Objects.hashCode(this.idUser);
         hash = 41 * hash + Objects.hashCode(this.email);
         return hash;
     }
@@ -105,14 +121,14 @@ public class User implements java.io.Serializable {
         if (!Objects.equals(this.email, other.email)) {
             return false;
         }
-        return Objects.equals(this.id, other.id);
+        return Objects.equals(this.idUser, other.idUser);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("User{");
-        sb.append("id=").append(id);
+        sb.append("id=").append(idUser);
         sb.append(", nome=").append(nome);
         sb.append(", sobreNome=").append(sobreNome);
         sb.append(", email=").append(email);
