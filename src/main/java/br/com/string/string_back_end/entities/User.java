@@ -1,9 +1,8 @@
 package br.com.string.string_back_end.entities;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.time.Instant;
+import java.util.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -20,10 +19,12 @@ public class User implements java.io.Serializable {
     private String email;
     private String senha;
     private String telefone;
+    private Instant dtCadastro;
     /**
      * Neste mapeamento, um usuario pode ter varios aparelhos associados ao seu id.
      * E um aparelho pertence a um usuario.
      */
+    @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Aparelho> aparelhos ;// = new ArrayList<Aparelho>();
 
@@ -38,6 +39,7 @@ public class User implements java.io.Serializable {
         this.email = email;
         this.senha = senha;
         this.telefone = telefone;
+        this.dtCadastro = Instant.now();
     }
 
 
@@ -96,6 +98,14 @@ public class User implements java.io.Serializable {
 
     public void setAparelhos(List<Aparelho> aparelhos) {
         this.aparelhos = aparelhos;
+    }
+
+    public Instant getDtCadastro() {
+        return dtCadastro;
+    }
+
+    public void setDtCadastro(Instant dtCadastro) {
+        this.dtCadastro = dtCadastro;
     }
 
     @Override

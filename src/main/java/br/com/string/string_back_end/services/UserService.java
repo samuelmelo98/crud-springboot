@@ -7,7 +7,9 @@ import br.com.string.string_back_end.repositories.UserRepository;
 
 import br.com.string.string_back_end.entities.User;
 
+import java.time.Instant;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class UserService {
@@ -20,6 +22,10 @@ public class UserService {
     }
 
     public User adicionarUsuario(User user){
+        if (Objects.isNull(user.getDtCadastro())) {
+            user.setDtCadastro(Instant.now());
+        }
+
         return userRepository.saveAndFlush(user);
     }
 

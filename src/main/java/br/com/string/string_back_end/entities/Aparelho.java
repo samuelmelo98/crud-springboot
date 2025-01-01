@@ -19,6 +19,7 @@ public class Aparelho {
     private String numeroSerie;
     private Instant dataEntrada;
     private String observacoes;
+    @Enumerated(EnumType.STRING)
     private AparelhoStatus aparelhoStatus = AparelhoStatus.AGUARDANDO_ORCAMENTO;
     @ManyToOne
     @JoinColumn(name = "id_user", nullable = false)
