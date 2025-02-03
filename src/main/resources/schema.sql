@@ -29,7 +29,9 @@ CREATE TABLE IF NOT EXISTS tb_user (
     sobre_nome VARCHAR(255),
     email VARCHAR(255),
     senha VARCHAR(255),
-    telefone VARCHAR(255)
+    telefone VARCHAR(255),
+    dt_cadastro TIMESTAMP,
+    roles varchar[]
 );
 
 -- Criar a tabela tb_aparelho e usar a sequence seq_tb_aparelho

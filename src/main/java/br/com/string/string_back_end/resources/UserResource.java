@@ -1,5 +1,6 @@
 package br.com.string.string_back_end.resources;
 
+import br.com.string.string_back_end.dto.UsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

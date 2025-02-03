@@ -7,5 +7,5 @@ import br.com.string.string_back_end.entities.User;
 
 @Repository
 public interface UserRepository  extends JpaRepository<User, Long>{
-    
+    User findByNome(String nome);
 }

@@ -3,7 +3,9 @@ import java.time.Instant;
 import java.util.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.hypersistence.utils.hibernate.type.array.ListArrayType;
 import jakarta.persistence.*;
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "tb_user")
@@ -20,6 +22,7 @@ public class User implements java.io.Serializable {
     private String senha;
     private String telefone;
     private Instant dtCadastro;
+    private List<String> roles;
     /**
      * Neste mapeamento, um usuario pode ter varios aparelhos associados ao seu id.
      * E um aparelho pertence a um usuario.
@@ -106,6 +109,16 @@ public class User implements java.io.Serializable {
 
     public void setDtCadastro(Instant dtCadastro) {
         this.dtCadastro = dtCadastro;
+    }
+
+    @Type(ListArrayType.class)
+    @Column(name = "roles", columnDefinition = "varchar[]")
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
     }
 
     @Override
