@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS tb_user (
     id_user BIGINT PRIMARY KEY DEFAULT NEXTVAL('seq_tb_user'),
     nome VARCHAR(255),
     sobre_nome VARCHAR(255),
-    email VARCHAR(255),
+    email VARCHAR(255) UNIQUE,
     senha VARCHAR(255),
     telefone VARCHAR(255),
     dt_cadastro TIMESTAMP,

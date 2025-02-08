@@ -37,9 +37,14 @@ public class UserService {
         return userRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuario não encontrado."));
     }
 
-    public User obterUsuarioPorLogin(String login){
+    public User obterUsuarioPorName(String login){
         return  userRepository.findByNome(login);
     }
+
+    public User obterUsuarioPorEmail(String email){
+        return userRepository.findByEmail(email);
+    }
+
 
 
     

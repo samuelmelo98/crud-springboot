@@ -1,5 +1,7 @@
 package br.com.string.string_back_end.config;
 
+import br.com.string.string_back_end.security.CustomUserDetailsService;
+import br.com.string.string_back_end.services.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -44,8 +46,8 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    public UserDetailsService userDetailsService(){
+    public UserDetailsService userDetailsService(UserService userService){
 
-        return new InMemoryUserDetailsManager();
+        return new CustomUserDetailsService(userService);
     }
 }
