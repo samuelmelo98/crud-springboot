@@ -54,3 +54,4 @@ Autenticação e Autorização
         return org.springframework.security.core.userdetails.User.builder().username(user.getNome()).password(user.getSenha()).roles(user.getRoles().toArray(new String[user.getRoles().size()])).build();
     }
 }
+//teste
